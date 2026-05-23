@@ -1,0 +1,6 @@
+/Users/omar3bdlsamad/Desktop/Logistics/Logistics.Application/obj/Debug/net10.0/Logistics.Application.csproj.AssemblyReference.cache
+/Users/omar3bdlsamad/Desktop/Logistics/Logistics.Application/obj/Debug/net10.0/Logistics.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/omar3bdlsamad/Desktop/Logistics/Logistics.Application/obj/Debug/net10.0/Logistics.Application.AssemblyInfoInputs.cache
+/Users/omar3bdlsamad/Desktop/Logistics/Logistics.Application/obj/Debug/net10.0/Logistics.Application.AssemblyInfo.cs
+/Users/omar3bdlsamad/Desktop/Logistics/Logistics.Application/obj/Debug/net10.0/Logistics.Application.csproj.CoreCompileInputs.cache
+/Users/omar3bdlsamad/Desktop/Logistics/Logistics.Application/obj/Debug/net10.0/Logistics.Application.sourcelink.json

@@ -20,7 +20,7 @@ public class ProcessPaymentWebhookCommandHandler : IRequestHandler<ProcessPaymen
 
         if (request.GatewayStatus.ToUpper() == "SUCCESS")
         {
-            payment.Complete(); // بتقلب الـ Status وترمي الـ Domain Event
+            payment.Complete(); 
         }
 
         _paymentRepository.Update(payment);

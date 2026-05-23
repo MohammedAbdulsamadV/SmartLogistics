@@ -14,7 +14,6 @@ public class ShipmentsController : ApiControllerBase
         _mediator = mediator;
     }
 
-    // 1. إنشاء شحنة جديدة (للأدمن أو بيشتغل من الـ Event Handler تلقائياً)
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateShipmentCommand command)
     {
@@ -22,7 +21,6 @@ public class ShipmentsController : ApiControllerBase
         return Ok(result);
     }
 
-    // 2. تحديث الموقع الحالي للشحنة عن طريق الـ GPS أو السائق
     [HttpPut("location")]
     public async Task<IActionResult> UpdateLocation([FromBody] UpdateLiveLocationCommand command)
     {
@@ -30,7 +28,6 @@ public class ShipmentsController : ApiControllerBase
         return Ok(result);
     }
 
-    // 3. إنهاء المرحلة الحالية وبدء المرحلة التالية في خط السير
     [HttpPut("complete-current-leg")]
     public async Task<IActionResult> CompleteLeg([FromBody] CompleteCurrentLegCommand command)
     {
@@ -38,7 +35,6 @@ public class ShipmentsController : ApiControllerBase
         return Ok(result);
     }
 
-    // 4. استعلام عن تفاصيل الشحنة والمحطات (الـ Query المكتوبة سابقاً)
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(Guid id)
     {

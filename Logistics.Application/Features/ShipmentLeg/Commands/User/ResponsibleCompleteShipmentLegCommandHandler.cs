@@ -18,10 +18,10 @@ public class ResponsibleCompleteShipmentLegCommandHandler: IRequestHandler<Respo
     public async Task<bool> Handle(ResponsibleCompleteShipmentLegCommand request, CancellationToken cancellationToken)
     {
         var shipment = await _shipmentRepository.GetShipmentWithDetailsAsync(request.ShipmentId);
-        if (shipment == null) throw new Exception("الشحنة غير موجودة.");
+        if (shipment == null) throw new Exception("Shipment not found");
 
         var leg = shipment.ShipmentLegs.FirstOrDefault(x => x.Sequence == request.Sequence);
-        if (leg == null) throw new Exception($"المحطة رقم {request.Sequence} غير موجودة.");
+        if (leg == null) throw new Exception($"Shipment leg  {request.Sequence} not found");
 
         // بيزنس السائق: بيقفل الـ Leg بتاعته بنفسه
         leg.CompleteLeg();

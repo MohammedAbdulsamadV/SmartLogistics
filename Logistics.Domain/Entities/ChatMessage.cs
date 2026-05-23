@@ -10,7 +10,7 @@ public class ChatMessage : BaseEntity
     public string MessageText { get; private set; }
     public DateTime SentAt { get; private set; } = DateTime.UtcNow;
     public bool IsRead { get; private set; }
-    public Guid ChatRoomId { get; private set; } // عشان نربطها بالـ Room في الداتابيز
+    public Guid ChatRoomId { get; private set; } 
     public ChatMessage(string senderId, SenderType type, string text)
     {
         SenderId = senderId;

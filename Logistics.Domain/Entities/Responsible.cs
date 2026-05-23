@@ -34,7 +34,7 @@ public class Responsible : BaseEntity
         Email = email;
         TaxNumber = taxNumber;
         Integration = integration;
-        IsActive = true; // القيمة الابتدائية عند الإنشاء
+        IsActive = true;
     }
     public void UpdateDetails(string name, string contactPhone, string email, string? taxNumber, ShippingIntegration? integration)
     {

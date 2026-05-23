@@ -35,11 +35,6 @@ public class PaymentGatewayService : IPaymentGatewayService
     {
         try
         {
-            // إنتجريشن Paymob المعتاد (Http REST API Calls):
-            // 1. اضرب API الـ Authentication تاخد Token
-            // 2. اضرب API الـ Order Registration تاخد Order ID
-            // 3. اضرب API الـ Payment Key Acceptance تاخد Payment Token اللي بيتحط في الـ iFrame URL
-
             return new GatewayCheckoutResult
             {
                 CheckoutUrl = "https://accept.paymob.com/api/acceptance/iframes/mock_iframe_id?payment_token=mock_token",
@@ -56,11 +51,6 @@ public class PaymentGatewayService : IPaymentGatewayService
     {
         try
         {
-            // هنا بتكتب كود الـ Stripe SDK الفعلي
-            // var options = new SessionCreateOptions { ... };
-            // var service = new SessionService();
-            // Session session = await service.CreateAsync(options);
-
             return new GatewayCheckoutResult
             {
                 CheckoutUrl = "https://checkout.stripe.com/pay/mock_session_id",

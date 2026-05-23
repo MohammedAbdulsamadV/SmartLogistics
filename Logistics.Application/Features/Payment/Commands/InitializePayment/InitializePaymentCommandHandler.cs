@@ -38,9 +38,8 @@ public class InitializePaymentCommandHandler : IRequestHandler<InitializePayment
             request.PaymentProviderName);
 
         if (!gatewayResult.IsSuccess)
-            throw new Exception($"فشل إنشاء جلسة الدفع: {gatewayResult.ErrorMessage}");
+            throw new Exception($"Failed to Create {gatewayResult.ErrorMessage}");
 
-        // حفظ بيانات الـ Value Object
         payment.SetGatewayInfo(request.PaymentProviderName, gatewayResult.TransactionReference, gatewayResult.CheckoutUrl);
 
         await _paymentRepository.AddAsync(payment);

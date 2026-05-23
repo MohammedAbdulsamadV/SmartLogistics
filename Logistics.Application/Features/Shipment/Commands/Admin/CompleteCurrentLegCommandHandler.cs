@@ -16,7 +16,6 @@ public class CompleteCurrentLegCommandHandler : IRequestHandler<CompleteCurrentL
 
     public async Task<bool> Handle(CompleteCurrentLegCommand request, CancellationToken cancellationToken)
     {
-        // بنعمل Include للـ Legs عشان الـ Domain Logic يقدر يرتبهم بالـ Sequence صح
         var shipment = await _shipmentRepository.GetShipmentWithDetailsAsync(request.ShipmentId);
         if (shipment == null) throw new Exception("Shipment not found");
 

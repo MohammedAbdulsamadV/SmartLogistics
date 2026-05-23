@@ -16,7 +16,6 @@ public class ShipmentLocationUpdatedEventHandler : INotificationHandler<Shipment
 
     public async Task Handle(ShipmentLocationUpdatedEvent notification, CancellationToken cancellationToken)
     {
-        // إرسال الإحداثيات الجديدة فوراً لجميع الأجهزة (الموبايل أو الويب) اللي فاتحة خريطة التتبع دي بالذات
         await _trackingHubService.SendLocationUpdateAsync(
             notification.ShipmentId, 
             notification.Lat, 

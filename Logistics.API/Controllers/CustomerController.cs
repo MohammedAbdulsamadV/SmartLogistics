@@ -13,6 +13,6 @@ public class CustomerController : ApiControllerBase
     public async Task<IActionResult> Create([FromBody] CreateCustomerCommand command)
     {
         var id = await _mediator.Send(command);
-        return Ok(new { CustomerId = id, Message = "تم تسجيل العميل بنجاح." });
+        return Ok(new { CustomerId = id, Message = "Customer Created" });
     }
 }

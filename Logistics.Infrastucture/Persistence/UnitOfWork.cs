@@ -28,14 +28,11 @@ public class UnitOfWork : IUnitOfWork
 
         var domainEvents = domainEntities.SelectMany(x => x.DomainEvents).ToList();
 
-        // 2. امسح الـ Events من الـ Entities عشان متتكررش
         domainEntities.ForEach(entity => entity.ClearDomainEvents());
 
-        // 3. ابعت الـ Events للـ Handlers بتوعها في الـ Application
         foreach (var domainEvent in domainEvents)
             await _publisher.Publish(domainEvent, cancellationToken);
 
-        // 4. احفظ في الداتابيز
         return await _Context.SaveChangesAsync(cancellationToken);
     }
 }

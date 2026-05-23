@@ -18,7 +18,6 @@ public class GetChatMessagesQueryHandler : IRequestHandler<GetChatMessagesQuery,
         var room = await _chatRoomRepository.GetByIdWithMessagesAsync(request.ChatRoomId, cancellationToken);
         if (room == null) return new List<MessageDto>();
 
-        // لتعليم الرسائل كـ Read لما العميل أو الدعم يفتح الشات
         foreach(var msg in room.Messages.Where(m => !m.IsRead))
         {
             msg.MarkAsRead();

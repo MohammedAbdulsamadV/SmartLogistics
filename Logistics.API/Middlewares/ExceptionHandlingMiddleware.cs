@@ -28,7 +28,6 @@ public class ExceptionHandlingMiddleware
     {
         context.Response.ContentType = "application/json";
     
-        // 1. استخدام Pattern Matching للتعرف على نوع الـ Exception وعمل Cast له في نفس السطر
         if (exception is Logistics.Application.Common.Exceptions.ValidationException validationException)
         {
             context.Response.StatusCode = StatusCodes.Status400BadRequest;
@@ -37,15 +36,13 @@ public class ExceptionHandlingMiddleware
             {
                 title = "Validation Error",
                 status = StatusCodes.Status400BadRequest,
-                detail = "واحد أو أكثر من البيانات المدخلة غير سليمة.",
-                // الآن سيقرأ الخاصية بنجاح لأن الكومبيلر علم أن نوعه الـ Custom Exception بتاعنا
+                detail = "One or more validation errors occurred",
                 errors = validationException.Errors 
             };
         
             return context.Response.WriteAsync(JsonSerializer.Serialize(validationResponse));
         }
 
-        // 2. التعامل مع أي خطأ سيرفر عام غير متوقع (500)
         context.Response.StatusCode = StatusCodes.Status500InternalServerError;
     
         var genericResponse = new 

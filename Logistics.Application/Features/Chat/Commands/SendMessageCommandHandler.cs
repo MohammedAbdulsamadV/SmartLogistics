@@ -5,7 +5,7 @@ namespace Logistics.Application.Features.Chat.Commands;
 
 public class SendMessageCommandHandler : IRequestHandler<SendMessageCommand, bool>
 {
-    private readonly IChatRoomRepository _chatRoomRepository; // ريبوزيتوري مخصص لقراءة الـ Aggregate بالـ Messages بتاعته
+    private readonly IChatRoomRepository _chatRoomRepository; 
     private readonly IUnitOfWork _unitOfWork;
 
     public SendMessageCommandHandler(IChatRoomRepository chatRoomRepository, IUnitOfWork unitOfWork)
@@ -17,8 +17,8 @@ public class SendMessageCommandHandler : IRequestHandler<SendMessageCommand, boo
     public async Task<bool> Handle(SendMessageCommand request, CancellationToken cancellationToken)
     {
         var room = await _chatRoomRepository.GetByIdWithMessagesAsync(request.ChatRoomId, cancellationToken);
-        if (room == null) throw new Exception("أوضة المحادثة غير موجودة.");
-        if (!room.IsActive) throw new Exception("لا يمكن إرسال رسالة في محادثة مغلقة.");
+        if (room == null) throw new Exception("Chat room not found");
+        if (!room.IsActive) throw new Exception("message is not sent");
 
         room.AddMessage(request.SenderId, request.SenderType, request.MessageText);
         

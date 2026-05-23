@@ -13,14 +13,11 @@ public static class DependencyInjection
     {
         var assembly = Assembly.GetExecutingAssembly();
 
-        // 2. تسجيل MediatR
         services.AddMediatR(configuration => 
             configuration.RegisterServicesFromAssembly(assembly));
 
-        // 3. تسجيل AutoMapper - دلوقتي الـ assembly مش هتدي ايرور
         services.AddAutoMapper(assembly);
 
-        // 4. تسجيل FluentValidation
         services.AddValidatorsFromAssembly(assembly);
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));

@@ -16,9 +16,8 @@ public class GetAdminDashboardDetailsQueryHandler :
 
     public async Task<AdminShipmentDetailsDto> Handle(GetAdminDashboardDetailsQuery request, CancellationToken cancellationToken)
     {
-        // سحب كامل للشحنة والـ Legs والـ Responsibles بتوعها من الـ Database
         var shipment = await _shipmentRepository.GetShipmentWithDetailsAsync(request.ShipmentId);
-        if (shipment == null) throw new Exception("الشحنة غير موجودة لوحة التحكم.");
+        if (shipment == null) throw new Exception("Shipment not found");
 
         var dto = new AdminShipmentDetailsDto
         {

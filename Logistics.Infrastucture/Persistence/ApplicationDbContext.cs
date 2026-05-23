@@ -31,7 +31,6 @@ public class ApplicationDbContext : DbContext
     }
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        // 1. احتفظ بنسخة من الـ Events قبل السيف (عشان لو الـ State اتغيرت)
         var domainEntities = ChangeTracker.Entries<BaseEntity>()
             .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any())
             .Select(x => x.Entity)
@@ -41,16 +40,13 @@ public class ApplicationDbContext : DbContext
             .SelectMany(x => x.DomainEvents)
             .ToList();
 
-        // 2. سيف الداتا في الداتابيز فعلياً
         var result = await base.SaveChangesAsync(cancellationToken);
 
-        // 3. طالما السيف تم بنجاح (result > 0 أو مفيش Exception)، ابعت الـ Events للـ Handlers
         foreach (var domainEvent in domainEvents)
         {
             await _mediator.Publish(domainEvent, cancellationToken);
         }
 
-        // 4. نظف الـ Events من الـ Entities عشان متشتغلش تاني بالخطأ
         foreach (var entity in domainEntities)
         {
             entity.ClearDomainEvents();
@@ -63,20 +59,16 @@ public class ApplicationDbContext : DbContext
         builder.ToTable("Orders");
         builder.HasKey(o => o.Id);
 
-        // One-to-Many: Order -> OrderItems
-        // بنعرف الـ EF إن الـ Items تابعة للأوردر وبتمسح معاه (Cascade)
+       
         builder.HasMany(o => o.OrderItems)
             .WithOne()
-            .HasForeignKey("OrderId") // Shadow Property في الداتابيز
+            .HasForeignKey("OrderId") 
             .OnDelete(DeleteBehavior.Cascade);
 
-        // الربط مع العميل (بالـ ID فقط كما في الـ Domain)
         builder.Property(o => o.CustomerId).IsRequired();
 
-        // Value Object: ShippingAddress
         builder.OwnsOne(o => o.ShippingAddress);
 
-        // تفعيل الوصول للـ Field الخاص بالـ List (Encapsulation)
         var navigation = builder.Metadata.FindNavigation(nameof(Order.OrderItems));
         navigation?.SetPropertyAccessMode(PropertyAccessMode.Field);
     }
@@ -89,20 +81,17 @@ public class ApplicationDbContext : DbContext
         builder.Property(s => s.Status).HasConversion<int>().IsRequired();
         builder.Property(s => s.RoutePolyline).HasMaxLength(2000).IsRequired(false);
 
-        // تفكيك الـ Value Object (GpsCoordinates) لأعمدة في نفس الجدول
         builder.OwnsOne(s => s.CurrentLocation, cl =>
         {
             cl.Property(c => c.Latitude).HasColumnName("CurrentLatitude").HasColumnType("decimal(18,7)");
             cl.Property(c => c.Longitude).HasColumnName("CurrentLongitude").HasColumnType("decimal(18,7)");
         });
 
-        // علاقة الـ One-to-Many مع الـ ShipmentLegs مع تفعيل الـ Cascade Delete
         builder.HasMany(s => s.ShipmentLegs)
             .WithOne()
             .HasForeignKey(l => l.ShipmentId)
             .OnDelete(DeleteBehavior.Cascade);
                
-        // لـ تفعيل الـ Backing Field للـ List الخاصة بالـ Legs
         var navigation = builder.Metadata.FindNavigation(nameof(Shipment.ShipmentLegs));
         navigation?.SetPropertyAccessMode(PropertyAccessMode.Field);
     }
@@ -114,19 +103,16 @@ public class ApplicationDbContext : DbContext
         builder.Property(cr => cr.OrderId).IsRequired();
         builder.Property(cr => cr.IsActive).IsRequired();
 
-        // علاقة الـ Customer بالـ ChatRooms (العميل يقدر يفتح كذا شات على كذا أوردر)
         builder.HasOne(cr => cr.Customer)
             .WithMany()
             .HasForeignKey(cr => cr.CustomerId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // علاقة الـ One-To-Many بين الـ ChatRoom والـ ChatMessages الكومبو ده مهم جداً
         builder.HasMany(cr => cr.Messages)
             .WithOne()
             .HasForeignKey(m => m.ChatRoomId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // بنعرف الـ EF Core إن الـ _messages هي الـ Backing Field للـ Collection
         builder.Metadata.FindNavigation(nameof(ChatRoom.Messages))!
             .SetPropertyAccessMode(PropertyAccessMode.Field);
     }
@@ -139,7 +125,6 @@ public class ApplicationDbContext : DbContext
         builder.Property(p => p.Status).HasConversion<int>().IsRequired();
         builder.Property(p => p.Method).HasConversion<int>().IsRequired();
 
-        // تفكيك الـ Value Object لـ أعمدة داخل نفس جدول الـ Payments
         builder.OwnsOne(p => p.GatewayDetails, gd =>
         {
             gd.Property(g => g.Provider).HasColumnName("GatewayProvider").HasMaxLength(50);
@@ -159,10 +144,9 @@ public class ApplicationDbContext : DbContext
             builder.Property(r => r.Type).HasConversion<int>().IsRequired();
             builder.Property(r => r.ContactPhone).HasMaxLength(50).IsRequired();
             builder.Property(r => r.Email).HasMaxLength(150).IsRequired();
-            builder.Property(r => r.IsActive).IsRequired(false); // لأنه قابل يكون Null (bool?)
+            builder.Property(r => r.IsActive).IsRequired(false);  
             builder.Property(r => r.TaxNumber).HasMaxLength(100).IsRequired(false);
 
-            // لو الـ ShippingIntegration عبارة عن Owned Entity أو كلاس فرعي بنعمله Mapping هنا
             builder.OwnsOne(r => r.Integration);
         }
     }

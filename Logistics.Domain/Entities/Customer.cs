@@ -22,7 +22,7 @@ public class Customer : BaseEntity
         PhoneNumber = phoneNumber;
         TaxNumber = taxNumber;
         CreditLimit = creditLimit;
-        CurrentBalance = 0; // بيبدأ بـ 0 أوتوماتيك
+        CurrentBalance = 0; 
     }
     public void UpdateBalance(decimal amount)
     {

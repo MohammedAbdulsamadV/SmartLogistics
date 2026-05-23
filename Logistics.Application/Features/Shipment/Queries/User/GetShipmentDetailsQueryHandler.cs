@@ -15,10 +15,9 @@ public class GetShipmentDetailsQueryHandler : IRequestHandler<GetShipmentDetails
 
     public async Task<ShipmentDetailsDto> Handle(GetShipmentDetailsQuery request, CancellationToken cancellationToken)
     {
-        // سحب الشحنة بالـ Legs والـ Responsible بتوعها
         var shipment = await _shipmentRepository.GetShipmentWithDetailsAsync(request.ShipmentId);
         if (shipment == null) 
-            throw new Exception("الشحنة المطلوبة غير موجودة.");
+            throw new Exception("Shipment not found!");
 
         var dto = new ShipmentDetailsDto
         {
@@ -30,7 +29,6 @@ public class GetShipmentDetailsQueryHandler : IRequestHandler<GetShipmentDetails
             Legs = new List<LegDto>()
         };
 
-        // ترتيب الـ Legs بالـ Sequence عشان تطلع للأدمن أو اليوزر مظبوطة بالخطوات
         foreach (var leg in shipment.ShipmentLegs.OrderBy(x => x.Sequence))
         {
             dto.Legs.Add(new LegDto
@@ -38,7 +36,7 @@ public class GetShipmentDetailsQueryHandler : IRequestHandler<GetShipmentDetails
                 Sequence = leg.Sequence,
                 Mode = leg.Mode.ToString(),
                 Status = leg.Status.ToString(),
-                ResponsibleName = leg.Responsible?.Name ?? "لم يحدد بعد",
+                ResponsibleName = leg.Responsible?.Name ?? "Not Selected",
                 ResponsibleType = leg.Responsible?.Type.ToString() ?? "N/A",
                 ActualStart = leg.ActualStart,
                 ActualEnd = leg.ActualEnd

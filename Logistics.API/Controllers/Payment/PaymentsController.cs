@@ -14,6 +14,6 @@ public class PaymentsController : ApiControllerBase
     public async Task<IActionResult> InitializePayment([FromBody] InitializePaymentCommand command)
     {
         var result = await _mediator.Send(command);
-        return Ok(result); // هيرجع الـ CheckoutUrl والـ Reference للفرونت إند علطول
+        return Ok(result); 
     }
 }

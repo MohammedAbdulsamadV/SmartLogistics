@@ -19,7 +19,7 @@ public class ResponsibleController : ApiControllerBase
         return Ok(new 
         { 
             ResponsibleId = id, 
-            Message = "تم تسجيل المسؤول بنجاح في النظام." 
+            Message = "Responsible Created" 
         });
     }
     
@@ -29,7 +29,7 @@ public class ResponsibleController : ApiControllerBase
     {
         command.ResponsibleId = id;
         var result = await _mediator.Send(command);
-        return Ok(new { Success = result, Message = "تم تحديث بيانات الربط الخارجي بنجاح." });
+        return Ok(new { Success = result, Message = "Data Updated" });
     }
     
 }

@@ -17,10 +17,10 @@ public class AdminAssignLegResponsibleCommandHandler : IRequestHandler<AdminAssi
     public async Task<bool> Handle(AdminAssignLegResponsibleCommand request, CancellationToken cancellationToken)
     {
         var shipment = await _shipmentRepository.GetShipmentWithDetailsAsync(request.ShipmentId);
-        if (shipment == null) throw new Exception("الشحنة غير موجودة.");
+        if (shipment == null) throw new Exception("Shipment not found");
 
         var leg = shipment.ShipmentLegs.FirstOrDefault(x => x.Sequence == request.Sequence);
-        if (leg == null) throw new Exception($"المحطة رقم {request.Sequence} غير موجودة.");
+        if (leg == null) throw new Exception($"Shipment Leg {request.Sequence} not found");
 
         // بيزنس الأدمن: تعيين كابتن جديد للمحطة دي
         leg.AssignResponsible(request.NewResponsibleId);

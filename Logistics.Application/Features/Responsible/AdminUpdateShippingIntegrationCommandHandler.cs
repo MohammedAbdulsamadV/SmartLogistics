@@ -20,14 +20,12 @@ public class AdminUpdateShippingIntegrationCommandHandler : IRequestHandler<Admi
         var responsible = await _responsibleRepository.GetByIdAsync(request.ResponsibleId);
         if (responsible == null) throw new Exception("Responsible not found.");
 
-        // تكوين الـ Value Object الجديد
         var integration = new ShippingIntegration(
             request.Provider, 
             request.ApiKey, 
             request.WebhookUrl, 
             request.ApiBaseUrl);
 
-        // بنباصي الكائن بالكامل للميثود اللي جوه الـ Responsible لعمل الـ Update
         responsible.UpdateDetails(
             responsible.Name, 
             responsible.ContactPhone, 

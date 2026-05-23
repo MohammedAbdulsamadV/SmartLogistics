@@ -7,12 +7,12 @@ public class UpdateLiveLocationCommandValidator : AbstractValidator<UpdateLiveLo
     public UpdateLiveLocationCommandValidator()
     {
         RuleFor(x => x.ShipmentId)
-            .NotEmpty().WithMessage("رقم الشحنة مطلوب ولا يمكن أن يكون فارغاً.");
+            .NotEmpty().WithMessage("ShipmentId is required.");
 
         RuleFor(x => x.Latitude)
-            .InclusiveBetween(-90m, 90m).WithMessage("إحداثيات خط العرض (Latitude) يجب أن تكون بين -90 و 90.");
+            .InclusiveBetween(-90m, 90m).WithMessage("Latitude between (-90m, 90m)");
 
         RuleFor(x => x.Longitude)
-            .InclusiveBetween(-180m, 180m).WithMessage("إحداثيات خط الطول (Longitude) يجب أن تكون بين -180 و 180.");
+            .InclusiveBetween(-180m, 180m).WithMessage("Langitude between (-180m, 180m)");
     }
 }

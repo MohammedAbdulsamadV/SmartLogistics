@@ -13,11 +13,10 @@ public class TrackingController : ApiControllerBase
         _mediator = mediator;
     }
 
-    // Endpoint يستقبل إحداثيات السائق الحالية ويرسلها للـ Handler
     [HttpPost("update-location")]
     public async Task<IActionResult> UpdateLocation([FromBody] UpdateLiveLocationCommand command)
     {
         var result = await _mediator.Send(command);
-        return Ok(new { Success = result, Message = "تم تحديث الموقع الحي وبثه للمشتركين." });
+        return Ok(new { Success = result, Message = "Location Updated" });
     }   
 }

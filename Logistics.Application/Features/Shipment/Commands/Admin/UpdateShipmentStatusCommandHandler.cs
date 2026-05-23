@@ -18,7 +18,6 @@ public class UpdateShipmentStatusCommandHandler : IRequestHandler<UpdateShipment
         var shipment = await _shipmentRepository.GetByIdAsync(request.ShipmentId);
         if (shipment == null) throw new Exception("Shipment not found");
 
-        // نداء ميثود الـ Domain مباشرة
         shipment.UpdateStatus(request.NewStatus);
 
         _shipmentRepository.Update(shipment);

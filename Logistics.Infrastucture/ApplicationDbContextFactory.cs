@@ -10,7 +10,6 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
     {
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
         
-        // حط الـ Connection String بتاعتك هنا يدوياً للـ Migration فقط
         optionsBuilder.UseSqlServer("Server=localhost;Database=LogisticsDataBase;User Id=sa;Password=P@ssw0rd;TrustServerCertificate=True;");
 
         return new ApplicationDbContext(optionsBuilder.Options, null);

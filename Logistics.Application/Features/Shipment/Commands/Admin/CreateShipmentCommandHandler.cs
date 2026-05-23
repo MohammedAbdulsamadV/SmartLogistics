@@ -16,7 +16,6 @@ public class CreateShipmentCommandHandler : IRequestHandler<CreateShipmentComman
 
     public async Task<Guid> Handle(CreateShipmentCommand request, CancellationToken cancellationToken)
     {
-        // استخدام الـ Constructor الحقيقي للـ Domain اللي بيخلي الحالة AtOrigin تلقائياً
         var shipment = new Domain.Entities.Shipment(request.OrderId);
         shipment.VolumetricWeight = request.VolumetricWeight;
 
