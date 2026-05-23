@@ -1,0 +1,45 @@
+{
+  "version": 2,
+  "dgSpecHash": "Jq+fXcRR6ig=",
+  "success": true,
+  "projectFilePath": "/Users/omar3bdlsamad/Desktop/Logistics/Logistics.Application/Logistics.Application.csproj",
+  "expectedPackageFiles": [
+    "/Users/omar3bdlsamad/.nuget/packages/automapper/16.1.1/automapper.16.1.1.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.0/automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/fluentvalidation/11.0.0/fluentvalidation.11.0.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.0.0/fluentvalidation.dependencyinjectionextensions.11.0.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/mediatr/14.1.0/mediatr.14.1.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/mediatr.extensions.fluentvalidation.aspnetcore/6.0.0/mediatr.extensions.fluentvalidation.aspnetcore.6.0.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/mediatr.extensions.microsoft.dependencyinjection/10.0.1/mediatr.extensions.microsoft.dependencyinjection.10.0.1.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/microsoft.aspnetcore.authorization/2.3.9/microsoft.aspnetcore.authorization.2.3.9.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/microsoft.aspnetcore.connections.abstractions/2.3.0/microsoft.aspnetcore.connections.abstractions.2.3.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/microsoft.aspnetcore.http.features/2.3.0/microsoft.aspnetcore.http.features.2.3.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/microsoft.aspnetcore.signalr.common/1.2.0/microsoft.aspnetcore.signalr.common.1.2.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/microsoft.aspnetcore.signalr.core/1.2.10/microsoft.aspnetcore.signalr.core.1.2.10.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/microsoft.aspnetcore.signalr.protocols.json/1.2.0/microsoft.aspnetcore.signalr.protocols.json.1.2.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/10.0.0/microsoft.extensions.dependencyinjection.abstractions.10.0.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/microsoft.extensions.logging.abstractions/10.0.0/microsoft.extensions.logging.abstractions.10.0.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/microsoft.extensions.options/10.0.0/microsoft.extensions.options.10.0.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/microsoft.extensions.primitives/10.0.0/microsoft.extensions.primitives.10.0.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/microsoft.identitymodel.abstractions/8.14.0/microsoft.identitymodel.abstractions.8.14.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.14.0/microsoft.identitymodel.jsonwebtokens.8.14.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/microsoft.identitymodel.logging/8.14.0/microsoft.identitymodel.logging.8.14.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/microsoft.identitymodel.tokens/8.14.0/microsoft.identitymodel.tokens.8.14.0.nupkg.sha512",
+    "/Users/omar3bdlsamad/.nuget/packages/newtonsoft.json/11.0.2/newtonsoft.json.11.0.2.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'Newtonsoft.Json' 11.0.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-5crp-9r3c-p9vr",
+      "projectPath": "/Users/omar3bdlsamad/Desktop/Logistics/Logistics.Application/Logistics.Application.csproj",
+      "warningLevel": 1,
+      "filePath": "/Users/omar3bdlsamad/Desktop/Logistics/Logistics.Application/Logistics.Application.csproj",
+      "libraryId": "Newtonsoft.Json",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
+}

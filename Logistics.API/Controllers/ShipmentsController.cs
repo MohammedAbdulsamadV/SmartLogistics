@@ -1,0 +1,49 @@
+using Logistics.Application.Features.Shipment.Commands.Admin;
+using Logistics.Application.Features.Shipment.Queries.User;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Logistics.API.Controllers;
+
+public class ShipmentsController : ApiControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public ShipmentsController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    // 1. إنشاء شحنة جديدة (للأدمن أو بيشتغل من الـ Event Handler تلقائياً)
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CreateShipmentCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return Ok(result);
+    }
+
+    // 2. تحديث الموقع الحالي للشحنة عن طريق الـ GPS أو السائق
+    [HttpPut("location")]
+    public async Task<IActionResult> UpdateLocation([FromBody] UpdateLiveLocationCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return Ok(result);
+    }
+
+    // 3. إنهاء المرحلة الحالية وبدء المرحلة التالية في خط السير
+    [HttpPut("complete-current-leg")]
+    public async Task<IActionResult> CompleteLeg([FromBody] CompleteCurrentLegCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return Ok(result);
+    }
+
+    // 4. استعلام عن تفاصيل الشحنة والمحطات (الـ Query المكتوبة سابقاً)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetDetails(Guid id)
+    {
+        var query = new GetShipmentDetailsQuery { ShipmentId = id };
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+}
